@@ -1,0 +1,9 @@
+
+#apx_schedule input,
+#apx_schedule select,
+#apx_schedule textarea{
+    box-sizing: border-box!important;
+    max-width:100%;
+    min-height:34px;
+}
+#apx_schedule textarea{border-radius:10px!important;width:100%}
