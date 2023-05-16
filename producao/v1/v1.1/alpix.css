@@ -1,0 +1,32 @@
+
+#apx_schedule input,
+#apx_schedule select,
+#apx_schedule textarea{
+    box-sizing: border-box!important;
+    max-width:100%;
+    min-height:34px;
+}
+#apx_schedule textarea{border-radius:10px!important;width:100%}
+
+#formas-envio-wrapper .envio-prazo-entrega{font-size:0;line-height:0}
+#formas-envio-wrapper .envio-prazo-entrega:after{content:"Entrega Agendada";font-size:11px}
+.formas .accordion-heading .forma-conteiner{display:flex;align-items:center;}
+.formas .accordion-heading .forma-conteiner .envio-preco{margin-right:5px}
+.formas.envio .accordion-heading .forma-conteiner .text-content{margin-right:15px;}
+.formas.envio .accordion-heading .forma-conteiner .envio-nome{
+    font-size: 10px;
+    box-sizing: content-box!important;
+    overflow: hidden;
+    z-index: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    min-height: unset!important;
+}
+
+#formas-envio-wrapper:not(:empty):after{
+    content: 'Selecione a data e período de entrega logo abaixo na etapa de agendamento.';
+    font-size: 10px;
+    color: green;
+    text-decoration: underline;
+}
