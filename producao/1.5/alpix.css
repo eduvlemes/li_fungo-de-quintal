@@ -1,6 +1,6 @@
 
 .formas.envio+.warning-text,
-.produto .cep .aviso-disponibilidade{display: none;}
+.produto .cep .aviso-disponibilidade{display: none!important;}
 #apx_schedule input,
 #apx_schedule select,
 #apx_schedule textarea{

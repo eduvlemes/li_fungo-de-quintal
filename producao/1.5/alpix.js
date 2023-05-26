@@ -224,6 +224,7 @@ if(sessionStorage.getItem('testMode')){
             }
         })
         .done(function(data) {
+            
             schedule.currentRule = data.data[0].attributes.shipping_rules;
             schedule.functions.datepicker();
             $('#dt_entrega').val('');
