@@ -20,21 +20,21 @@ if(sessionStorage.getItem('testMode')){
     schedule.currentRule = null;
 
     schedule.functions.calcHours = function(date,minusTime){
-        console.log('function ---');
+        //console.log('function ---');
         var agora = new Date(date);
         var horasASubtrair = minusTime;
 
-        console.log(agora);
+        //console.log(agora);
         agora.setHours(agora.getHours() - horasASubtrair);
-        console.log(agora);
+        //console.log(agora);
 
         if (agora.getHours() < 0) {
             agora.setDate(agora.getDate() - 1);
             agora.setHours(agora.getHours() + 23);
         }
-        console.log(agora);
-        console.log('end function ---');
-        //console.log(agora)
+        //console.log(agora);
+        //console.log('end function ---');
+        ////console.log(agora)
         return agora;
     };
 
@@ -95,7 +95,7 @@ if(sessionStorage.getItem('testMode')){
                 }
             },
             beforeShowDay: function(date){
-                ////console.log(date);
+                //////console.log(date);
                 if($('[name="forma_envio"]:checked').val() != undefined){
                     let day = date.getUTCDay();
                     let validDate = new Date();
@@ -107,13 +107,13 @@ if(sessionStorage.getItem('testMode')){
                     
                     let disabled_days = specialRules  ? specialRules.find(el => el.attributes.date == fdate && el.attributes.active && el.attributes.block_delivery) : false;
                     
-                    console.log('available_days',available_days)
+                    //console.log('available_days',available_days)
 
                     // if(specialRules && specialRules.find(el => el.attributes.date == fdate && el.attributes.active && el.attributes.block_delivery)){
-                    //     //console.log(specialRules.find(el => el.attributes.date == fdate))
+                    //     ////console.log(specialRules.find(el => el.attributes.date == fdate))
                     // }
 
-                    console.log(date)
+                    //console.log(date)
                     //date.setHours(23,59,59)
                     if (parseInt(date.getDate()) < parseInt(validDate.getDate()) &&
                     parseInt(date.getMonth()) <= parseInt(validDate.getMonth()) &&
@@ -121,19 +121,19 @@ if(sessionStorage.getItem('testMode')){
                         return [false, ""];
                     }else{
                         if(available_days.includes(day)){
-                            ////console.log('available:',day);
+                            //////console.log('available:',day);
                             if(disabled_days){
-                                ////console.log('disabled:',day);
+                                //////console.log('disabled:',day);
                                 return [false,""];
                             }else{
                                 let availablePeriods = schedule.currentRule.filter(el => el.active == true && el.periods.length > 0);
                                 let estimatedDateTime = new Date(date)
                                 let validatedPeriods = false
                                 
-                                console.log('availablePeriods',availablePeriods)
+                                //console.log('availablePeriods',availablePeriods)
                                 $.each(availablePeriods, function(k, periods){
                                     $.each(periods.periods, function(k, period){
-                                        //console.log(period)
+                                        ////console.log(period)
                                         estimatedDateTime.setHours(period.estimated_time_start.slice(0,2))
                                         estimatedDateTime.setMinutes(period.estimated_time_start.slice(3,2))
                 
@@ -170,7 +170,7 @@ if(sessionStorage.getItem('testMode')){
                 let fdate = _date.toISOString().substr(0, 10);
                 let day = _date.getUTCDay();
                 
-                ////console.log(fdate)
+                //////console.log(fdate)
 
                 let dayRule = schedule.currentRule.find(el => el.active == true && el.day_of_week == day && el.periods.length > 0)
                 
@@ -178,7 +178,7 @@ if(sessionStorage.getItem('testMode')){
                 if (overrideRule){
                     overrideRule = overrideRule.find(el => el.attributes.active && !el.attributes.block_delivery && el.attributes.date == fdate && (el.attributes.shipping_methods.data.length == 0 || el.attributes.shipping_methods.data.find(_el => parseInt(_el.attributes.id_loja_integrada) == schedule.settings.id_loja_integrada)));
                 }
-                ////console.log(overrideRule);
+                //////console.log(overrideRule);
                 $('#hr_entrega').html('<option value="">Selecione...</option>');
                 
                 if(overrideRule){
@@ -191,18 +191,18 @@ if(sessionStorage.getItem('testMode')){
                         let estimatedDateTime = new Date(fdate);
                         estimatedDateTime.setDate(estimatedDateTime.getDate() + 1);
                         $.each(dayRule.periods, function(k, period){
-                            ////console.log(period)
+                            //////console.log(period)
                             estimatedDateTime.setHours(period.estimated_time_start.slice(0,2))
                             estimatedDateTime.setMinutes(period.estimated_time_start.slice(3,2))
 
-                            ////console.log(estimatedDateTime)
+                            //////console.log(estimatedDateTime)
                             let limitDateTime = schedule.functions.calcHours(estimatedDateTime,period.schedule_until_hour)
                             let currentDate = new Date()
                             if(limitDateTime.getTime() > currentDate.getTime()){
                                 availablePeriods.push(period)
                             }
                         });
-                        ////console.log(availablePeriods)
+                        //////console.log(availablePeriods)
                         //$.each(dayRule.periods, function(k, period){ 
                         $.each(availablePeriods, function(k, period){ 
                             $('#hr_entrega').append('<option value="'+ period.name +'" period_open="'+ schedule.functions.convertTime(period.estimated_time_start) +'" period_close="'+ schedule.functions.convertTime(period.estimated_time_end) +'">'+ period.name +' - '+ schedule.functions.convertTime(period.estimated_time_start) + ' às ' + schedule.functions.convertTime(period.estimated_time_end) + '</option>');                    
@@ -289,7 +289,7 @@ if(sessionStorage.getItem('testMode')){
                 });
             }        
         });
-        //console.log(order);    
+        ////console.log(order);    
 
         if(!sessionStorage.getItem('order_' + order.num_pedido)){
             let dateStr = order.data_agendamento;
@@ -330,7 +330,7 @@ if(sessionStorage.getItem('testMode')){
                 }
             })
             .done(function(data) {
-                ////console.log(data);
+                //////console.log(data);
                 sessionStorage.setItem('order_' + order.num_pedido, true);
             
             })
