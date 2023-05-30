@@ -68,7 +68,7 @@ if(sessionStorage.getItem('testMode')){
         }
         if($('#hr_entrega').length > 0){
             txt = txt +  "Período da entrega: " + $('#hr_entrega').val() + '\n';
-            txt = txt +  "Horário da entrega: " + $('#hr_entrega').find('option:selected').attr('period_open') + '\n';
+            txt = txt +  "Horário da entrega: " + $('#hr_entrega').find('option:selected').attr('period_open') + ' até '+ $('#hr_entrega').find('option:selected').attr('period_close') + '\n';
         }
         if($('#formularioObservacoes_2').length > 0){
             txt = txt +  "Observações: " + $('#formularioObservacoes_2').val() + '\n';
