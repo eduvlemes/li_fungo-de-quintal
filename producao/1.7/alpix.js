@@ -214,9 +214,11 @@ if(sessionStorage.getItem('testMode')){
     };
 
     $('body').on('change','[name="forma_envio"]',function(){
+        
         $('#apx_schedule').addClass('loading');
         let me = $(this);
         schedule.settings.id_loja_integrada = me.val();
+        sessionStorage.setItem('schedule.settings.id_loja_integrada', me.val());
         $.ajax({
             url: schedule.settings.apiUrl + 'formas-de-envios' + '?' + 'filters[id_loja_integrada][$eq]='+ me.val()+'&populate[shipping_rules][populate][periods]=*',
             headers: {
@@ -251,6 +253,9 @@ if(sessionStorage.getItem('testMode')){
     if($('.pagina-pedido-finalizado').length > 0){
         let order = [];
         order.num_pedido = $('.numero-pedido').first().text().trim();
+
+        order.modalidade_envio = sessionStorage.getItem('schedule.settings.id_loja_integrada');
+
         $('.caixa-info li b').each(function(){
             let txt = $(this).text();
             if(txt == "Seu nome:"){
@@ -266,6 +271,8 @@ if(sessionStorage.getItem('testMode')){
                 order.cep = $(this).next('span').text().trim();
             }  
         });
+
+        
         $('legend').each(function(){
             let txt = $(this).text();
             if(txt == "Pagamento"){
@@ -286,15 +293,18 @@ if(sessionStorage.getItem('testMode')){
                     } 
                     if(item_.trim().split(':')[0] == "Horário da entrega"){
                         order.schedule_open = item_.trim().split(':')[1].trim() + ':' + item_.trim().split(':')[2].trim();
+                        order.schedule_open = order.schedule_open.split('até')[0].trim()
                     } 
                 });
             }        
         });
         
-
+        console.log(order)
         if(!sessionStorage.getItem('order_' + order.num_pedido)){
             let dateStr = order.data_agendamento;
             let timeStr = order.schedule_open;
+            // console.log(dateStr)
+            // console.log(timeStr)
             let [day, month, year] = dateStr.split('/');
             let [hour, minute] = timeStr.split(':');
             let date = new Date(Date.UTC(year, month - 1, day, hour, minute));
@@ -327,7 +337,8 @@ if(sessionStorage.getItem('testMode')){
                     client_name: order.cliente,
                     client_mail: window.dataLayer[0].email,
                     order_id: order.num_pedido,
-                    schedule_date_time: schedule_date_time
+                    schedule_date_time: schedule_date_time,
+                    formas_de_envio: order.modalidade_envio
                     }
                 }
             })
