@@ -1,0 +1,68 @@
+
+.formas.envio+.warning-text,
+.produto .cep .aviso-disponibilidade{display: none!important;}
+#apx_schedule input,
+#apx_schedule select,
+#apx_schedule textarea{
+    box-sizing: border-box!important;
+    max-width:100%;
+    min-height:34px;
+}
+#apx_schedule textarea{border-radius:10px!important;width:100%}
+
+#formas-envio-wrapper .envio-prazo-entrega,
+.tabela-carrinho .formas-envio .prazo,
+.produto .cep ul li .prazo{font-size:0;line-height:0}
+.tabela-carrinho .formas-envio .prazo:after,
+#formas-envio-wrapper .envio-prazo-entrega:after,
+.produto .cep ul li .prazo:after{content:"Entrega Agendada";font-size:11px}
+.formas .accordion-heading .forma-conteiner{display:flex;align-items:center;}
+.formas .accordion-heading .forma-conteiner .envio-preco{margin-right:5px}
+.formas.envio .accordion-heading .forma-conteiner .text-content{margin-right:15px;}
+.formas.envio .accordion-heading .forma-conteiner .envio-nome{
+    font-size: 10px;
+    box-sizing: content-box!important;
+    overflow: hidden;
+    z-index: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    min-height: unset!important;
+}
+
+#formas-envio-wrapper:not(:empty):after{
+    content: 'Selecione a data e período de entrega logo abaixo na etapa de agendamento.';
+    font-size: 10px;
+    color: green;
+}
+
+#apx_schedule{position: relative;}
+.loading-box{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,.8);
+    display: none;
+}
+.loading .loading-box{display: block;}
+.loading-box:after{
+    content:"Carregando...";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#apx_schedule legend.titulo.obs:after{
+    content: "Selecione uma modalidade de envio para prosseguir com o agendamento";
+    font-size: 10px;
+    color: #d20000;
+    display: block;
+    font-weight: normal;
+    text-transform: initial;
+    margin: 10px 0 -10px 0;
+}
