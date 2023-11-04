@@ -217,6 +217,7 @@
     };
 
     $('body').on('change','[name="forma_envio"]',function(){
+        window.ATIVAR_AGENDAMENTO = $('[name="forma_envio"]:checked')?.closest('[data-nome]')?.attr('data-nome')?.toLowerCase().includes('correios') ? false : true;
         window.ATIVAR_AGENDAMENTO ? $('#apx_schedule').slideDown() : $('#apx_schedule').slideUp();
         $('#apx_schedule').addClass('loading');
         let me = $(this);
