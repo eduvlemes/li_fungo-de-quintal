@@ -217,7 +217,7 @@
     };
 
     $('body').on('change','[name="forma_envio"]',function(){
-        
+        window.ATIVAR_AGENDAMENTO ? $('#apx_schedule').slideDown() : $('#apx_schedule').slideUp();
         $('#apx_schedule').addClass('loading');
         let me = $(this);
         schedule.settings.id_loja_integrada = me.val();
@@ -229,13 +229,16 @@
             }
         })
         .done(function(data) {
-            
-            schedule.currentRule = data.data[0].attributes.shipping_rules;
-            schedule.functions.datepicker();
+            if (window.ATIVAR_AGENDAMENTO){
+                schedule.currentRule = data.data[0].attributes.shipping_rules;
+                schedule.functions.datepicker();
+             }
             $('#dt_entrega').val('');
             $('#hr_entrega').empty();
             $('#apx_schedule').removeClass('loading');
             $('#apx_schedule legend.titulo').removeClass('obs');
+           
+            
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
             console.error('Erro:', textStatus, errorThrown);
